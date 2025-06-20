@@ -45,7 +45,9 @@ pub fn decode_variable_int(bytes: &[u8]) -> Result<u64, String> {
         val[0..8].copy_from_slice(&bytes[2..10]);
         Ok(u64::from_le_bytes(val))
     } else {
-        let val = bytes.first().ok_or("Failed to decode variable int".to_string())?;
+        let val = bytes
+            .first()
+            .ok_or("Failed to decode variable int".to_string())?;
         println!("Decoding variable int: {:?}", val);
         Ok(*val as u64)
     }
